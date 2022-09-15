@@ -38,22 +38,47 @@
             <button>submit</button>
         </div>
         <div class="displaybox">
-            <div class="btn"><</div>
+            <div class="btn left">&#60</div>
             <div class="display">
 
             </div>
-            <div class="btn">></div>
+            <div class="btn right">></div>
         </div>
     </div>
     <script>
         let submitbtn=document.querySelector("button")
         let inputBox=document.querySelector("input")
-        let displayBox=document.querySelector(".display") //why
-        submitbtn:onclick=function(){
+        let displayBox=document.querySelector(".display")
+        let rightRotateBtn=document.querySelector(".right")
+        let leftRotateBtn=document.querySelector(".left")
+
+        let userString=""
+        rightRotateBtn.onclick=rotate
+        leftRotateBtn.onclick=rotate
+
+        submitbtn.onclick=function(){
+            userString=inputBox.value
             displayBox.innerHTML =`<h1> ${inputBox.value} </h1> `
 
         }
+        function rotate(e){
+            let btn=e.target
+            if(btn.innerText.trim()=='>'){
+                userString=rotateRightOnce(userString)
+            }
+            else{
+                userString=rotateLeftOnce(userString)
+            }
+            console.log(userString)
+            displayBox.innerHTML =`<h1>${userString}</h1> `
+        }
+        function rotateRightOnce(s){
+            return s.slice(-1)+s.slice(0,-1) 
 
+        }
+        function rotateLeftOnce(s){
+            return s.slice(1)+s[0]
+        }
     </script>
 </body>
 </html>
